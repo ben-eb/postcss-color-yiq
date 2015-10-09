@@ -9,13 +9,14 @@ function err (node) {
     throw node.parent.error('No background color was found.', {plugin: plugin});
 }
 
-function getYIQContrast (colour) {
+function getYIQContrast (colour, colours) {
     let [r, g, b] = color(colour).rgbArray();
     let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-    return (yiq >= 128) ? '#000' : '#fff';
+    return (yiq >= 128) ? colours.dark : colours.light;
 }
 
-export default postcss.plugin(plugin, () => {
+export default postcss.plugin(plugin, (opts) => {
+    if (typeof opts === 'undefined') opts = {dark: '#000000', light: '#ffffff'};
     return css => {
         css.walkDecls('color', decl => {
             if (decl.value !== 'yiq') {
@@ -34,18 +35,18 @@ export default postcss.plugin(plugin, () => {
 
             decl.value = valueParser(background.value).walk(node => {
                 if (node.type === 'function' && /^(rgb|hsl)a?$/.test(node.value)) {
-                    node.value = getYIQContrast(stringify(node));
+                    node.value = getYIQContrast(stringify(node), opts);
                     node.type = 'word';
                     hasColour = true;
                     return;
                 }
                 if (node.type === 'word') {
                     if (!node.value.indexOf('#')) {
-                        node.value = getYIQContrast(node.value);
+                        node.value = getYIQContrast(node.value, opts);
                         hasColour = true;
                         return;
                     } else if (node.value in names) {
-                        node.value = getYIQContrast(names[node.value]);
+                        node.value = getYIQContrast(names[node.value], opts);
                         hasColour = true;
                         return;
                     }
