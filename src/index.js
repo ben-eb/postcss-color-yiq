@@ -9,14 +9,18 @@ function err (node) {
     throw node.parent.error('No background color was found.', {plugin: plugin});
 }
 
-function getYIQContrast (colour, colours) {
+function getYIQContrast (colour, {light, dark}) {
     let [r, g, b] = color(colour).rgbArray();
     let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-    return (yiq >= 128) ? colours.dark : colours.light;
+    return (yiq >= 128) ? dark : light;
 }
 
 export default postcss.plugin(plugin, (opts) => {
-    if (typeof opts === 'undefined') opts = {dark: '#000000', light: '#ffffff'};
+    opts = {
+        dark: '#000',
+        light: '#fff',
+        ...opts
+    };
     return css => {
         css.walkDecls('color', decl => {
             if (decl.value !== 'yiq') {

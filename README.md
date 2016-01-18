@@ -2,6 +2,7 @@
 
 > Set foreground text color based on the YIQ color space.
 
+
 ## Install
 
 With [npm](https://npmjs.org/package/postcss-color-yiq) do:
@@ -9,6 +10,7 @@ With [npm](https://npmjs.org/package/postcss-color-yiq) do:
 ```
 npm install postcss-color-yiq --save
 ```
+
 
 ## Example
 
@@ -36,19 +38,46 @@ h1 {
 }
 ```
 
+
+## API
+
+### yiq([options])
+
+#### options
+
+##### dark
+
+Type: `string`
+Default: `#000`
+
+Pass another hex color to customise the foreground color when the background
+is dark.
+
+##### light
+
+Type: `string`
+Default: `#fff`
+
+Pass another hex color to customise the foreground color when the background
+is light.
+
+
 ## Usage
 
 See the [PostCSS documentation](https://github.com/postcss/postcss#usage) for
 examples for your environment.
+
 
 ## Contributing
 
 Pull requests are welcome. If you add functionality, then please add unit tests
 to cover it.
 
+
 ## License
 
 MIT © [Ben Briggs](http://beneb.info)
+
 
 [ci]:      https://travis-ci.org/ben-eb/postcss-color-yiq
 [deps]:    https://gemnasium.com/ben-eb/postcss-color-yiq

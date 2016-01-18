@@ -1,4 +1,4 @@
-import tape from 'tape';
+import ava from 'ava';
 import postcss from 'postcss';
 import plugin from '../';
 import pkg from '../../package.json';
@@ -33,37 +33,40 @@ let tests = [{
     message: 'should pass through on non-yiq declarations',
     fixture: 'h1{color:#fff;background:#fff}',
     expected: 'h1{color:#fff;background:#fff}'
+}, {
+    message: 'should work with custom light colours',
+    fixture: 'h1{color:yiq;background:#000}',
+    expected: 'h1{color:yellow;background:#000}',
+    options: {light: 'yellow'}
+}, {
+    message: 'should work with custom dark colours',
+    fixture: 'h1{color:yiq;background:#fff}',
+    expected: 'h1{color:navy;background:#fff}',
+    options: {dark: 'navy'}
 }];
 
-function procss (css, options, callback, e) {
-    return postcss([ plugin(options) ]).process(css).then(callback, e);
-}
-
-tape(name, (t) => {
-    t.plan(tests.length);
-
-    tests.forEach(test => {
+tests.forEach(test => {
+    ava(test.message, t => {
         let options = test.options || {};
-        procss(test.fixture, options, result => {
-            t.equal(result.css, test.expected, test.message);
+        return postcss([ plugin(options) ]).process(test.fixture).then(result => {
+            t.same(result.css, test.expected);
         });
     });
 });
 
-tape('should use the postcss plugin api', t => {
-    t.plan(2);
+ava('should use the postcss plugin api', t => {
     t.ok(plugin().postcssVersion, 'should be able to access version');
-    t.equal(plugin().postcssPlugin, name, 'should be able to access name');
+    t.same(plugin().postcssPlugin, name, 'should be able to access name');
 });
 
-tape('error handling', t => {
-    t.plan(2);
-
+ava('should throw when a background is not defined', t => {
     t.throws(() => {
         return postcss([ plugin ]).process('h1{color:yiq}').css;
-    }, 'should throw when a background is not defined');
+    });
+});
 
+ava('should throw when a background color is not found', t => {
     t.throws(() => {
         return postcss([ plugin ]).process('h1{color:yiq;background:url(cat.jpg)}').css;
-    }, 'should throw when a background color is not found');
+    });
 });
