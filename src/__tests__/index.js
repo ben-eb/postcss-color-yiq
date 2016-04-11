@@ -49,14 +49,14 @@ tests.forEach(test => {
     ava(test.message, t => {
         let options = test.options || {};
         return postcss([ plugin(options) ]).process(test.fixture).then(result => {
-            t.same(result.css, test.expected);
+            t.deepEqual(result.css, test.expected);
         });
     });
 });
 
 ava('should use the postcss plugin api', t => {
-    t.ok(plugin().postcssVersion, 'should be able to access version');
-    t.same(plugin().postcssPlugin, name, 'should be able to access name');
+    t.truthy(plugin().postcssVersion, 'should be able to access version');
+    t.deepEqual(plugin().postcssPlugin, name, 'should be able to access name');
 });
 
 ava('should throw when a background is not defined', t => {
