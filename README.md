@@ -68,17 +68,24 @@ See the [PostCSS documentation](https://github.com/postcss/postcss#usage) for
 examples for your environment.
 
 
-## Contributing
+## Contributors
 
-Pull requests are welcome. If you add functionality, then please add unit tests
-to cover it.
+Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+| [<img src="https://avatars.githubusercontent.com/u/1282980?v=3" width="100px;"/><br /><sub>Ben Briggs</sub>](http://beneb.info)<br />[💻](https://github.com/ben-eb/postcss-color-yiq/commits?author=ben-eb) [📖](https://github.com/ben-eb/postcss-color-yiq/commits?author=ben-eb) 👀 [⚠️](https://github.com/ben-eb/postcss-color-yiq/commits?author=ben-eb) | [<img src="https://avatars.githubusercontent.com/u/582828?v=3" width="100px;"/><br /><sub>Vince Speelman</sub>](vinspee.me)<br />[💻](https://github.com/ben-eb/postcss-color-yiq/commits?author=VinSpee) | [<img src="https://avatars.githubusercontent.com/u/5635476?v=3" width="100px;"/><br /><sub>Bogdan Chadkin</sub>](https://github.com/TrySound)<br />👀 |
+| :---: | :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors] specification. Contributions of
+any kind welcome!
 
 ## License
 
 MIT © [Ben Briggs](http://beneb.info)
 
 
+[all-contributors]: https://github.com/kentcdodds/all-contributors
 [ci]:      https://travis-ci.org/ben-eb/postcss-color-yiq
 [deps]:    https://gemnasium.com/ben-eb/postcss-color-yiq
 [npm]:     http://badge.fury.io/js/postcss-color-yiq
