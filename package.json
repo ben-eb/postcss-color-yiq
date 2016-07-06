@@ -1,6 +1,6 @@
 {
   "name": "postcss-color-yiq",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Set foreground text color based on the YIQ color space.",
   "main": "dist/index.js",
   "scripts": {
