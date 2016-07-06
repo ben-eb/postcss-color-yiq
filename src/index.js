@@ -6,7 +6,7 @@ import valueParser, {stringify} from 'postcss-value-parser';
 const plugin = 'postcss-color-yiq';
 
 function err (node) {
-    throw node.parent.error('No background color was found.', {plugin: plugin});
+    throw node.parent.error('No background color was found.', {plugin});
 }
 
 function getYIQContrast (colour, {light, dark}) {
@@ -19,7 +19,7 @@ export default postcss.plugin(plugin, (opts) => {
     opts = {
         dark: '#000',
         light: '#fff',
-        ...opts
+        ...opts,
     };
     return css => {
         css.walkDecls('color', decl => {
